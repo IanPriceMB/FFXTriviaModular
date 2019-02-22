@@ -15,6 +15,7 @@ const pubsub = {
     }
   },
   transmit: function (eventName, data) {
+    console.log('here')
     if (this.pubsub[eventName]) {
       this.pubsub[eventName].forEach(function(fn) {
         fn(data);
