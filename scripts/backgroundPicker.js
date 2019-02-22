@@ -11,5 +11,5 @@ const backgroundPicker = (function() {
   function changeBackground(screen) {
     $body.css("background", `url(assets/backgrounds/${screen}.png) center center / 100% 100% no-repeat`);
     pubsub.transmit('imageLoaded', screen);
-  }
+  };
 })();

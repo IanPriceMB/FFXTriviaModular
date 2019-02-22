@@ -5,7 +5,7 @@ const musicPlayer = (function() {
   const $musicPlayers = $body.children('audio');
 
   //Bind Events
-  pubsub.subscribe('imageLoaded', pauseMusic)
+  pubsub.subscribe('imageLoaded', pauseMusic);
 
   function pauseMusic(track) {
     $musicPlayers.map(player =>  {
@@ -15,7 +15,7 @@ const musicPlayer = (function() {
       if (playerID !== track) {
         $currentPlayer.pause();
         $currentPlayer.currentTime = 0;
-      }
+      };
     });
 
     playMusic(track);
@@ -25,7 +25,7 @@ const musicPlayer = (function() {
     const $musicPlayer = $(`#${track}`).get(0);
     $musicPlayer.play();
     changeVolume(track);
-  }
+  };
 
   function changeVolume(track) {
     document.getElementById(track).volume = .05;

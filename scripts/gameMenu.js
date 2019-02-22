@@ -11,20 +11,19 @@ const gameMenu = (function(){
   //Bind Events
   pubsub.subscribe('imageLoaded', render);
 
-  function render(screen){
+  function render(){
     $container.empty();
     for(let i = 0; i < levelNames.length; i++) {
       const levelButton = $("<div class='level-button'>");
       $container.append(levelButton);
       levelButton.append("<h2>" + levelNames[i] + "</h2><p>" + levelDifficulty[i] + "</p>")
-    }
-  }
+    };
+  };
 
+  // Level select click event
   $container.on('click', '.level-button', function(){
     const level = this.firstChild.textContent.replace(/ /g, '');
     pubsub.transmit('levelStart', level);
-  })
-  function levelStart() {
-    
-  }
+  });
+
 })();
