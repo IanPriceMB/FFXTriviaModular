@@ -1,5 +1,5 @@
 //Changes the background
-const backgroundPicker = (function(){
+const backgroundPicker = (function() {
 
   //Cache DOM
   const $body = $(`body`);
@@ -10,5 +10,6 @@ const backgroundPicker = (function(){
 
   function changeBackground(screen) {
     $($body).css("background", `url(assets/backgrounds/${screen}.png) center center / 100% 100% no-repeat`);
+    pubsub.transmit('imageLoaded', screen);
   }
 })();

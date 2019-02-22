@@ -7,7 +7,8 @@ body, html {
   /* Flex Box */
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  position: relative; }
 
 body {
   background: url(../assets/backgrounds/mainScreen.png) center center/100% 100% no-repeat; }
@@ -20,7 +21,7 @@ body {
   /* Sizing */
   width: 40%;
   min-height: 1px;
-  max-height: 70vh;
+  max-height: 80%;
   /* Styling */
   padding: 20px;
   border-radius: 20px;
@@ -43,5 +44,8 @@ body {
     cursor: pointer; }
     .container button h2 {
       margin: 10px; }
+
+audio, video {
+  display: none; }
 
 /*# sourceMappingURL=style.css.map */

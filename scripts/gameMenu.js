@@ -10,22 +10,15 @@ const gameMenu = (function(){
   const $container = $(`.container`);
   
   //Bind Events
-  pubsub.subscribe('mainMenu', render);
+  pubsub.subscribe('imageLoaded', render);
 
   function render(screen){
-    //From the 'wait for images' npm package
-    // $($body).waitForImages().done(function() {
-
-      $($container).empty();
-      
-      for(let i = 0; i < levelNames.length; i++) {
-        const levelButton = $("<div class='level-button'>");
-        $($container).append(levelButton);
-        $(levelButton).append("<h2>" + levelNames[i] + "</h2><p>" + levelDifficulty[i] + "</p>")
-      }
-
-    // });
-
+    $($container).empty();
+    for(let i = 0; i < levelNames.length; i++) {
+      const levelButton = $("<div class='level-button'>");
+      $($container).append(levelButton);
+      $(levelButton).append("<h2>" + levelNames[i] + "</h2><p>" + levelDifficulty[i] + "</p>")
+    }
   }
 
   $($body).on('click', '.level-button', function(){
