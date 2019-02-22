@@ -2,29 +2,32 @@ const musicPlayer = (function() {
 
   //Cache DOM
   const $body = $(`body`);
+  const $musicPlayers = $body.children('audio');
 
   //Bind functions
-  pubsub.subscribe('imageLoaded', loadMusic)
+  pubsub.subscribe('imageLoaded', pauseMusic)
 
-  function loadMusic(track) {
-
-    const $musicPlayers = $($body).children('audio');
-    const $musicPlayer = $(`#${track}`);
-
-    $($musicPlayer).get(0).play();
-    volume(track);
-
+  function pauseMusic(track) {
     $musicPlayers.map(player =>  {
-      const currentPlayer = $musicPlayers[player].getAttribute('id')
+      const playerID = $musicPlayers[player].getAttribute('id');
+      const $currentPlayer = $("audio[id*='"+playerID+"']").get(0);
 
-      if ($musicPlayers[player].getAttribute('id') !== track) {
-        $("audio[id*='"+currentPlayer+"']").get(0).pause();
-        $("audio[id*='"+currentPlayer+"']").get(0).currentTime = 0;
+      if (playerID !== track) {
+        $currentPlayer.pause();
+        $currentPlayer.currentTime = 0;
       }
     });
+
+    playMusic(track);
   }
 
-  function volume(track) {
+  function playMusic(track) {
+    const $musicPlayer = $(`#${track}`).get(0);
+    $musicPlayer.play();
+    changeVolume(track);
+  }
+
+  function changeVolume(track) {
     document.getElementById(track).volume = .05;
   };
 
