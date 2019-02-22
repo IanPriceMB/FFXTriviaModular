@@ -4,7 +4,7 @@ const musicPlayer = (function() {
   const $body = $(`body`);
   const $musicPlayers = $body.children('audio');
 
-  //Bind functions
+  //Bind Events
   pubsub.subscribe('imageLoaded', pauseMusic)
 
   function pauseMusic(track) {

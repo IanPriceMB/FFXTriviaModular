@@ -6,22 +6,21 @@ const gameMenu = (function(){
   const levelDifficulty = ["very easy", "easy", "medium", "advanced", "expert"];
 
   //Cache DOM
-  const $body = $(`body`);
   const $container = $(`.container`);
   
   //Bind Events
   pubsub.subscribe('imageLoaded', render);
 
   function render(screen){
-    $($container).empty();
+    $container.empty();
     for(let i = 0; i < levelNames.length; i++) {
       const levelButton = $("<div class='level-button'>");
-      $($container).append(levelButton);
-      $(levelButton).append("<h2>" + levelNames[i] + "</h2><p>" + levelDifficulty[i] + "</p>")
+      $container.append(levelButton);
+      levelButton.append("<h2>" + levelNames[i] + "</h2><p>" + levelDifficulty[i] + "</p>")
     }
   }
 
-  $($body).on('click', '.level-button', function(){
+  $container.on('click', '.level-button', function(){
     const level = this.firstChild.textContent.replace(/ /g, '');
     pubsub.transmit('levelStart', level);
   })
