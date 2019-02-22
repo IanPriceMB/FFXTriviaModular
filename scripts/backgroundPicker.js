@@ -9,7 +9,6 @@ const backgroundPicker = (function(){
   pubsub.subscribe('levelStart', changeBackground);
 
   function changeBackground(screen) {
-    console.log('here')
     $($body).css("background", `url(assets/backgrounds/${screen}.png) center center / 100% 100% no-repeat`);
   }
 })();

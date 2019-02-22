@@ -28,4 +28,11 @@ const gameMenu = (function(){
 
   }
 
+  $($body).on('click', '.level-button', function(){
+    const level = this.firstChild.textContent.replace(/ /g, '');
+    pubsub.transmit('levelStart', level);
+  })
+  function levelStart() {
+    
+  }
 })();
