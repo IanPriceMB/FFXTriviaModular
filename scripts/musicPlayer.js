@@ -8,8 +8,8 @@ const musicPlayer = (function() {
   pubsub.subscribe('imageLoaded', pauseMusic);
 
   function pauseMusic(track) {
-    $musicPlayers.map(player =>  {
-      const playerID = $musicPlayers[player].getAttribute('id');
+    $musicPlayers.map(index =>  {
+      const playerID = $musicPlayers[index].getAttribute('id');
       const $currentPlayer = $("audio[id*='"+playerID+"']").get(0);
 
       if (playerID !== track) {
@@ -23,7 +23,13 @@ const musicPlayer = (function() {
 
   function playMusic(track) {
     const $musicPlayer = $(`#${track}`).get(0);
-    $musicPlayer.play();
+    const playPromise = $musicPlayer.play();
+
+    if (playPromise !== null){
+      console.log(playPromise);
+      playPromise.catch(() => { $musicPlayer.play(); });
+    };
+
     changeVolume(track);
   };
 

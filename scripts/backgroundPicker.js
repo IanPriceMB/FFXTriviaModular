@@ -1,17 +1,27 @@
 //Changes the background
 const backgroundPicker = (function() {
 
-  //Cache DOM
-  const $img = $('img');
-
   //Bind events
   pubsub.subscribe('mainMenu', changeBackground);
   pubsub.subscribe('levelStart', changeBackground);
 
-  function changeBackground(screen) {
+  async function changeBackground(screen){
+    const a = await newSrc(screen);
+
+    if(a){
+      pubsub.transmit('imageLoaded', screen)
+    }
+  }
+
+  async function newSrc (screen){
+    const $img = $('#background');
     $img.attr('src', `assets/backgrounds/${screen}.png`);
-    $img.on('load', function() {
-      pubsub.transmit('imageLoaded', screen);
-    });
-  };
+
+    return true
+  }
+
+  // $img.ready(function() {
+  //   console.log('sent')
+    
+  // });
 })();
