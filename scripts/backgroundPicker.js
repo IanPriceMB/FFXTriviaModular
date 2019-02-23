@@ -19,9 +19,5 @@ const backgroundPicker = (function() {
 
     return true
   }
-
-  // $img.ready(function() {
-  //   console.log('sent')
-    
-  // });
 })();
+//Revisit this if there is still loading times and try use set interval 

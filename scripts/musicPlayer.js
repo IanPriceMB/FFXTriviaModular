@@ -26,7 +26,6 @@ const musicPlayer = (function() {
     const playPromise = $musicPlayer.play();
 
     if (playPromise !== null){
-      console.log(playPromise);
       playPromise.catch(() => { $musicPlayer.play(); });
     };
 
