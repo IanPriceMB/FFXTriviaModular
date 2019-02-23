@@ -2,14 +2,16 @@
 const backgroundPicker = (function() {
 
   //Cache DOM
-  const $body = $(`body`);
+  const $img = $('img');
 
   //Bind events
   pubsub.subscribe('mainMenu', changeBackground);
   pubsub.subscribe('levelStart', changeBackground);
 
   function changeBackground(screen) {
-    $body.css("background", `url(assets/backgrounds/${screen}.png) center center / 100% 100% no-repeat`);
-    pubsub.transmit('imageLoaded', screen);
+    $img.attr('src', `assets/backgrounds/${screen}.png`);
+    $img.on('load', function() {
+      pubsub.transmit('imageLoaded', screen);
+    });
   };
 })();
