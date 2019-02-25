@@ -10,19 +10,28 @@ chooseAnswer = (answer, level) => {
     }
   }
 }
+const INITAL_STATE = {
+  Besaid: [],
+  Luca: [],
+  Djose: [],
+  ThunderPlains: [],
+  Gagazet: [],
+  Sin:[]
+}
 
 // Levels (reducers)
-const besaid = (besaidAnswers, action) => {
-  if (action.payload.type === 'Besaid'){
-    return [...besaidAnswers, action.payload]
+const levelsReducer = (state = INITAL_STATE, action) => {
+  if (action.type === 'ANSWER'){
+    return {...state[action.payload.level], ...action.payload.answer}
   }
 
-  return besaidAnswers;
+  return levelsReducer;
 }
 
 // Combines all level reducers to be access as one state
 const levels = combineReducers({
-  Besaid: besaid,
+  levelsReducer: levelsReducer
 });
 
-const store = createStory(levels);
+// State
+const store = createStore(levels);
