@@ -1,7 +1,7 @@
 {
   "name": "FFXTriviaModular",
   "version": "1.0.0",
-  "description": "I recently learned about pubsubs and modularizing code;",
+  "description": "Another version of my favorite project this time using modual code and redux!",
   "main": "index.js",
   "dependencies": {
     "redux": "^4.0.1"
@@ -15,7 +15,7 @@
     "url": "git+https://github.com/IanPriceMB/FFXTriviaModular.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ian Price",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/IanPriceMB/FFXTriviaModular/issues"

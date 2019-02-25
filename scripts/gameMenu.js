@@ -1,4 +1,4 @@
-//Controls the UI flow
+//This file contains all the scripts for the main menu
 
 const gameMenu = (function(){
   const levelNames = ["Besaid", "Luca", "Djose", "Thunder Plains", "Gagazet"];

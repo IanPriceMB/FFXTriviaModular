@@ -1,8 +1,7 @@
-//Changes the background
-const backgroundPicker = (function() {
+//This file dynamically changes the background
 
-  //Bind events
-
+const backgroundSelector = (function() {
+  
   //Event Listeners
   pubsub.subscribe('mainMenu', changeBackground);
   pubsub.subscribe('levelStart', changeBackground);
@@ -12,12 +11,13 @@ const backgroundPicker = (function() {
     if(a){
       pubsub.transmit('imageLoaded', screen);
     }
-  }
+  };
 
   async function newSrc (src){
     const $img = $('#background');
     $img.attr('src', `assets/backgrounds/${src}.png`);
     return true
-  }
+  };
+
 })();
 //Revisit this if there is still loading times and try use set interval 

@@ -1,10 +1,10 @@
+//This file controls the music
+
 const musicPlayer = (function() {
 
   //Cache DOM
   const $body = $(`body`);
   const $musicPlayers = $body.children('audio');
-
-  //Bind Events
 
   //Event Listeners
   pubsub.subscribe('imageLoaded', pauseMusic);
@@ -31,10 +31,10 @@ const musicPlayer = (function() {
       playPromise.catch(() => { $musicPlayer.play(); });
     };
 
-    changeVolume(track);
+    setVolume(track);
   };
 
-  function changeVolume(track) {
+  function setVolume(track) {
     document.getElementById(track).volume = .05;
   };
 

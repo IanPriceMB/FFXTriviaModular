@@ -1,4 +1,4 @@
-//countdown timer for questions
+// This file is a countdown timer
 
 const timer = (function(){
 

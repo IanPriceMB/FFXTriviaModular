@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine"> -->
     <link rel="stylesheet" type="text/css" href="styles/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <title>Final Fantasy X Trivia</title>
@@ -58,14 +58,24 @@
         <source src="assets/movies/imTheBest.mp4" type="video/mp4">
       </video>
 
+      <script data-main="js/config" src="require-22.3.6.js"></script>
+      <script>
+        require(['config'], function() {
+          //all my code goes here?
+        });
+      </script>
+      <script type="text/javascript" src="scripts/reduxState/store.js"></script>
+      <script type="text/javascript" src="scripts/reduxState/actions/types.js"></script>
+      <script type="text/javascript" src="scripts/reduxState/actions/answerQeustion.js"></script>
+      <script type="text/javascript" src="scripts/reduxState/reducers/levelsReducer.js"></script>
+      <script type="text/javascript" src="scripts/reduxState/reducers/root.js"></script>
       <script type="text/javascript" src="scripts/pubsub.js"></script>
       <script type="text/javascript" src="scripts/test.js"></script>
-      <script type="text/javascript" src="scripts/backgroundPicker.js"></script>
+      <script type="text/javascript" src="scripts/backgroundSelector.js"></script>
       <script type="text/javascript" src="scripts/gameMenu.js"></script>
       <script type="text/javascript" src="scripts/musicPlayer.js"></script>
       <script type="text/javascript" src="scripts/questions.js"></script>
       <script type="text/javascript" src="scripts/questionDisplayer.js"></script>
       <script type="text/javascript" src="scripts/timer.js"></script>
-      <script type="text/javascript" src="scripts/state.js"></script>
     </body> 
 </html>

@@ -1,3 +1,5 @@
+// This file is the main event handler mechanism
+
 const pubsub = {
   pubsub: {},
   subscribe: function (eventName, fn) {

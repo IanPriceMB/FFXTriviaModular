@@ -1,6 +1,9 @@
-//Displays the proper question
+//This file contains the all scritps related to the question menu
 
-const questionDisplayer = (function() {
+store = require("./reduxState/store");
+answerQuestion = require("./reduxState/actions/answerQeustion");
+
+const questionMenu = (function() {
 
   let questionTracker = 0;
  
@@ -15,6 +18,7 @@ const questionDisplayer = (function() {
   pubsub.subscribe('outOfTime', render);
 
   function render(level){
+    console.log(Store.getState());
     $container.empty();
     $container.append(`<div class='question'>${Questions[level][questionTracker].question}`);
     for (let i = 0; i < Questions[level][questionTracker].answers.length; i++){    
@@ -31,8 +35,9 @@ const questionDisplayer = (function() {
   function answerSelection(level){
     questionTracker++;
     if($(this).attr('data-value') == 1){
-      render('Besaid');
+      store.dispatch(answerQuestion(1, level))
       pubsub.transmit('nextQuestion');
+      render('Besaid');
     } else {
       displayAnswers();
     }
