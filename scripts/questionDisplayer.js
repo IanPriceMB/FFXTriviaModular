@@ -12,10 +12,10 @@ const questionDisplayer = (function() {
 
   //Event Listeners
   pubsub.subscribe('levelStart', render);
+  pubsub.subscribe('outOfTime', render);
 
   function render(level){
     $container.empty();
-
     $container.append(`<div class='question'>${Questions[level][questionTracker].question}`);
     for (let i = 0; i < Questions[level][questionTracker].answers.length; i++){    
       const answer = $("<div class='answer'>");
@@ -31,7 +31,8 @@ const questionDisplayer = (function() {
   function answerSelection(level){
     questionTracker++;
     if($(this).attr('data-value') == 1){
-      render(level);
+      render('Besaid');
+      pubsub.transmit('nextQuestion');
     } else {
       displayAnswers();
     }
@@ -39,6 +40,8 @@ const questionDisplayer = (function() {
 
   function displayAnswers(){
     console.log('woot');
+    render('Besaid');
+    pubsub.transmit('nextQuestion');
   };
 
 
