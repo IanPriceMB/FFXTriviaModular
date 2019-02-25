@@ -4,7 +4,6 @@ const questionDisplayer = (function() {
 
   let questionTracker = 0;
  
-
   //Cache DOM
   const $container = $(`.container`);
 
