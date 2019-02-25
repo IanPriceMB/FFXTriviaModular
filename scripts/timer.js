@@ -1,6 +1,9 @@
 //countdown timer for questions
 
-timer = (function(){
+const timer = (function(){
+
+  let time;
+  let intervalID;
 
   //Cache DOM
   $container = $('.container');
@@ -8,20 +11,26 @@ timer = (function(){
   //Bind Events
 
   //Event Listeners
-  pubsub.subscribe('levelStart', start);
-  pubsub.subscribe('nextQuestion', start);
+  pubsub.subscribe('levelStart', runTimer);
+  pubsub.subscribe('nextQuestion', runTimer);
 
-  function start() {
-
+  function runTimer() {
+    time = 20;
+    clearInterval(intervalID);
+    intervalID = setInterval(tick, 1000);
   };
 
   function stop(){
-
-  }
+    clearInterval(intervalID);
+  };
 
   function tick(){
-
-  }
-
-
+    time--;
+    if (time == 0) {
+      stop();
+      pubsub.transmit('outOfTime');
+    } else {
+      pubsub.transmit('tick', time);
+    }
+  };
 })();
