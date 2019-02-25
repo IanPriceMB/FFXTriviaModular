@@ -1,3 +1,5 @@
+//All the game's questions
+
 var Questions = {
     //Besaid / very easy questions
         Besaid: [

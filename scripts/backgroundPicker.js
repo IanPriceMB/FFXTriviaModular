@@ -10,7 +10,7 @@ const backgroundPicker = (function() {
   async function changeBackground(screen){
     const a = await newSrc(screen);
     if(a){
-      pubsub.transmit('imageLoaded', screen)
+      pubsub.transmit('imageLoaded', screen);
     }
   }
 
