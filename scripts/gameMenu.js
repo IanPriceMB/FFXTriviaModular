@@ -1,7 +1,6 @@
 //Controls the UI flow
 
 const gameMenu = (function(){
-
   const levelNames = ["Besaid", "Luca", "Djose", "Thunder Plains", "Gagazet"];
   const levelDifficulty = ["very easy", "easy", "medium", "advanced", "expert"];
 
@@ -9,7 +8,10 @@ const gameMenu = (function(){
   const $container = $(`.container`);
   
   //Bind Events
-  pubsub.subscribe('imageLoaded', render);
+  $container.on('click', '.level-button', levelSelect);
+
+  //Event Listeners
+  pubsub.subscribe('mainMenu', render);
 
   function render(){
     $container.empty();
@@ -21,9 +23,9 @@ const gameMenu = (function(){
   };
 
   // Level select click event
-  $container.on('click', '.level-button', function(){
+  function levelSelect(){
     const level = this.firstChild.textContent.replace(/ /g, '');
     pubsub.transmit('levelStart', level);
-  });
+  };
 
 })();
