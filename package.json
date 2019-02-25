@@ -1,0 +1,24 @@
+{
+  "name": "FFXTriviaModular",
+  "version": "1.0.0",
+  "description": "I recently learned about pubsubs and modularizing code;",
+  "main": "index.js",
+  "dependencies": {
+    "redux": "^4.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IanPriceMB/FFXTriviaModular.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IanPriceMB/FFXTriviaModular/issues"
+  },
+  "homepage": "https://github.com/IanPriceMB/FFXTriviaModular#readme"
+}
