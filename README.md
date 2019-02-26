@@ -14,3 +14,5 @@ This time I will be implementing *SASS, BEM and better CSS* practices.
 I will also be practicing *PubSub flow and modular JS*!
 
 This is all extremely straight forward but practice makes perfect. 
+
+**THIS PROJECT IS ON HIATUS FOR A WHILE**

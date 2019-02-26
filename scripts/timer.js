@@ -23,7 +23,7 @@ const timer = (function(){
     time = 20;
 
     //Added this render to counter act a weird visual delay bug
-    $container.prepend(`<div class='timer'>${time}</div>`);
+    render();
 
     clearInterval(intervalID);
     intervalID = setInterval(tick, 1000);
