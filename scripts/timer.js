@@ -8,8 +8,6 @@ const timer = (function(){
   //Cache DOM
   $container = $('.container');
 
-  //Bind Events
-
   //Event Listeners
   pubsub.subscribe('levelStart', runTimer);
   pubsub.subscribe('nextQuestion', runTimer);

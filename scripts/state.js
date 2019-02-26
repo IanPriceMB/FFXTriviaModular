@@ -18,7 +18,7 @@ const state = {
 
   updateQeustionTracker: function (data){
     switch (data) {
-      case 'nextQuestion':
+      case 'answered':
       this.state.questionTracker++;
       break;
 

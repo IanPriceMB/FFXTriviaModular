@@ -9,14 +9,14 @@ const questionMenu = (function() {
   const $container = $(`.container`);
 
   //Bind Events
-  $container.on('click', '.answer', answerSelection);
+  $container.on('click', '.answer', playerChoice);
 
   //Event Listeners
-  pubsub.subscribe('levelStart', getState);
-  pubsub.subscribe('outOfTime', getState);
-  pubsub.subscribe('nextQuestion', getState);
+  pubsub.subscribe('levelStart', componentDidMount);
+  pubsub.subscribe('outOfTime', componentDidMount);
+  pubsub.subscribe('nextQuestion', componentDidMount);
 
-  function getState(){
+  function componentDidMount(){
     const data = state.getState();
     render(data.levelTracker, data.questionTracker)
   }
@@ -28,32 +28,45 @@ const questionMenu = (function() {
     for (let i = 0; i < Questions[level][questionTracker].answers.length; i++){    
       const answer = $("<div class='answer'>");
       answer.attr("data-value", Questions[level][questionTracker].answers[i].value);
-      $container.append(answer);     
+      $container.append(answer);    
+
       const answerID = $(`<span>${i}</span>`);
       const answerText = $(`<span>${Questions[level][questionTracker].answers[i].a}</span>`);
       answer.append(answerID, answerText);
-  }
-  };
-
-  function answerSelection(){
-    const data = state.getState();
-    const level = data.levelTracker;
-    const dataValue = $(this).attr('data-value');
-
-    state.updateQeustionTracker('nextQuestion');
-
-    if(dataValue == 1){
-      state.updateLevel(level, dataValue);
-      pubsub.transmit('nextQuestion');
-    } else {
-      state.updateLevel(level, dataValue);
-      displayAnswers(level);
     }
   };
 
-  function displayAnswers(){
-    pubsub.transmit('nextQuestion');
+  function playerChoice(){
+    const data = state.getState();
+    const level = data.levelTracker;
+    const answer = $(this).attr('data-value');
+    console.log(level)
+    console.log(data.questionTracker)
+
+    state.updateQeustionTracker('answered');
+
+    if(answer == 1){
+      state.updateLevel(level, answer);
+      nextQuestion(level, data);
+    } else {
+      state.updateLevel(level, answer);
+      displayAnswers(level, data);
+    }
   };
 
+  function displayAnswers(level, data){
+    nextQuestion(level, data);
+  };
+  function nextQuestion(level, data){
+    if(Questions[level].length == data.questionTracker){
+      console.log('here')
+      pubsub.transmit('mainMenu', 'mainScreen');
+      
+    } else {
+      console.log('here')
+      pubsub.transmit('nextQuestion');
+    }
+  
+  }
 
 })();
