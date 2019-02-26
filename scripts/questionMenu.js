@@ -4,8 +4,6 @@
 // answerQuestion = require("./reduxState/actions/answerQeustion");
 
 const questionMenu = (function() {
-
-  let questionTracker = 0;
  
   //Cache DOM
   const $container = $(`.container`);
@@ -14,38 +12,46 @@ const questionMenu = (function() {
   $container.on('click', '.answer', answerSelection);
 
   //Event Listeners
-  pubsub.subscribe('levelStart', render);
-  pubsub.subscribe('outOfTime', render);
+  pubsub.subscribe('levelStart', getState);
+  pubsub.subscribe('outOfTime', getState);
+  pubsub.subscribe('nextQuestion', getState);
 
-  function render(level){
-    // console.log(Store.getState());
+  function getState(){
+    const data = state.getState();
+    render(data.levelTracker, data.questionTracker)
+  }
+
+  function render(level, questionTracker){
     $container.empty();
     $container.append(`<div class='question'>${Questions[level][questionTracker].question}`);
+
     for (let i = 0; i < Questions[level][questionTracker].answers.length; i++){    
       const answer = $("<div class='answer'>");
-      answer.attr("id", i);
       answer.attr("data-value", Questions[level][questionTracker].answers[i].value);
       $container.append(answer);     
-      const answerID = $(`<span class='ID'>${i}</span>`);
-      const answerText = $(`<span class='text'>${Questions[level][questionTracker].answers[i].a}</span>`);
+      const answerID = $(`<span>${i}</span>`);
+      const answerText = $(`<span>${Questions[level][questionTracker].answers[i].a}</span>`);
       answer.append(answerID, answerText);
   }
   };
 
-  function answerSelection(level){
-    questionTracker++;
-    if($(this).attr('data-value') == 1){
-      // store.dispatch(answerQuestion(1, level))
+  function answerSelection(){
+    const data = state.getState();
+    const level = data.levelTracker;
+    const dataValue = $(this).attr('data-value');
+
+    state.updateQeustionTracker('nextQuestion');
+
+    if(dataValue == 1){
+      state.updateLevel(level, dataValue);
       pubsub.transmit('nextQuestion');
-      render('Besaid');
     } else {
-      displayAnswers();
+      state.updateLevel(level, dataValue);
+      displayAnswers(level);
     }
   };
 
   function displayAnswers(){
-    console.log('woot');
-    render('Besaid');
     pubsub.transmit('nextQuestion');
   };
 

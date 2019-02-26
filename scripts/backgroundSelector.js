@@ -4,7 +4,13 @@ const backgroundSelector = (function() {
   
   //Event Listeners
   pubsub.subscribe('mainMenu', changeBackground);
-  pubsub.subscribe('levelStart', changeBackground);
+  pubsub.subscribe('levelStart', getState);
+
+  function getState() {
+    const data = state.getState();
+
+    changeBackground(data.levelTracker)
+  }
 
   async function changeBackground(screen){
     const a = await newSrc(screen);

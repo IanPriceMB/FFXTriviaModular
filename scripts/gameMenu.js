@@ -29,7 +29,8 @@ const gameMenu = (function(){
   // Level select click event
   function levelSelect(){
     const level = this.firstChild.textContent.replace(/ /g, '');
-    pubsub.transmit('levelStart', level);
+    state.updateLevelTracker(level);
+    pubsub.transmit('levelStart');
   };
 
 })();

@@ -10,18 +10,28 @@ const state = {
     },
     questionTracker: 0,
     levelTracker: null,
-    levelDifficulty: ["very easy", "easy", "medium", "advanced", "expert"]
   },
 
   updateLevel: function (level, data){
-    this.state.level[level] = this.state.level[level].push(data);
+  this.state.level[level].push(data);
   },
+
   updateQeustionTracker: function (data){
-    this.state.questionTracker = data;
+    switch (data) {
+      case 'nextQuestion':
+      this.state.questionTracker++;
+      break;
+
+      case 'resetLevel':
+      this.state.questionTracker = 0;
+      break;
+    }
   }, 
+
   updateLevelTracker: function (data){
     this.state.levelTracker = data;
   },
+  
   getState: function () {
     return this.state;
   }
