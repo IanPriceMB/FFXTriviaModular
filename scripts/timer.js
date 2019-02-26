@@ -15,7 +15,7 @@ const timer = (function(){
   pubsub.subscribe('nextQuestion', runTimer);
 
   function render(){
-    $('.timer').empty();
+    $('.timer').remove();
     $container.prepend(`<div class='timer'>${time}</div>`);
   };
 
