@@ -1,5 +1,6 @@
 //This file contains all the scripts for the main menu
-
+import {pubsub} from'./pubsub';
+import {state} from './state';
 const gameMenu = (function(){
 
   //Cache DOM
@@ -9,7 +10,7 @@ const gameMenu = (function(){
   $container.on('click', '.level-button', levelSelect);
 
   //Event Listeners
-  pubsub.subscribe('mainMenu', componentDidMount);
+  pubsub.subscribe('imageLoaded', componentDidMount);
 
   function componentDidMount(){
     const data = state.getState();
@@ -24,6 +25,7 @@ const gameMenu = (function(){
       $container.append(levelButton);
       levelButton.append("<h2>" + level + "</h2>")
     };
+    $('.timer').remove();
   };
 
   // Level select click event

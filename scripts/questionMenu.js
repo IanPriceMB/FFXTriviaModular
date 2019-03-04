@@ -1,8 +1,7 @@
 //This file contains the all scritps related to the question menu
 
-// store = require("./reduxState/store");
-// answerQuestion = require("./reduxState/actions/answerQeustion");
-
+import {pubsub} from'./pubsub';
+import {state} from './state';
 const questionMenu = (function() {
  
   //Cache DOM
@@ -12,13 +11,19 @@ const questionMenu = (function() {
   $container.on('click', '.answer', playerChoice);
 
   //Event Listeners
-  pubsub.subscribe('levelStart', componentDidMount);
+  pubsub.subscribe('levelImageLoaded', componentDidMount);
   pubsub.subscribe('outOfTime', componentDidMount);
   pubsub.subscribe('nextQuestion', componentDidMount);
 
   function componentDidMount(){
     const data = state.getState();
-    render(data.levelTracker, data.questionTracker)
+    const level = data.levelTracker;
+
+    if(Questions[level].length == data.questionTracker){
+      pubsub.transmit('mainMenu', 'mainScreen');
+    } else {
+      render(data.levelTracker, data.questionTracker);
+    }
   }
 
   function render(level, questionTracker){
@@ -40,33 +45,19 @@ const questionMenu = (function() {
     const data = state.getState();
     const level = data.levelTracker;
     const answer = $(this).attr('data-value');
-    console.log(level)
-    console.log(data.questionTracker)
 
     state.updateQeustionTracker('answered');
+    state.updateLevel(level, answer);
 
-    if(answer == 1){
-      state.updateLevel(level, answer);
-      nextQuestion(level, data);
+    if(answer == 1){   
+      pubsub.transmit('nextQuestion');
     } else {
-      state.updateLevel(level, answer);
       displayAnswers(level, data);
     }
   };
 
-  function displayAnswers(level, data){
-    nextQuestion(level, data);
+  function displayAnswers(){
+    pubsub.transmit('nextQuestion');
   };
-  function nextQuestion(level, data){
-    if(Questions[level].length == data.questionTracker){
-      console.log('here')
-      pubsub.transmit('mainMenu', 'mainScreen');
-      
-    } else {
-      console.log('here')
-      pubsub.transmit('nextQuestion');
-    }
-  
-  }
 
 })();

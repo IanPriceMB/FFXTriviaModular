@@ -1,5 +1,6 @@
 // This file is a countdown timer
-
+import {pubsub} from'./pubsub';
+import {state} from './state';
 const timer = (function(){
 
   let time;
@@ -11,6 +12,7 @@ const timer = (function(){
   //Event Listeners
   pubsub.subscribe('levelStart', runTimer);
   pubsub.subscribe('nextQuestion', runTimer);
+  pubsub.subscribe('outOfTime', runTimer);
 
   function render(){
     $('.timer').remove();
@@ -20,7 +22,6 @@ const timer = (function(){
   function runTimer() {
     time = 20;
 
-    //Added this render to counter act a weird visual delay bug
     render();
 
     clearInterval(intervalID);
@@ -34,9 +35,10 @@ const timer = (function(){
   function tick(){
     time--;
     render();
-    if (time == 0) {
-      stop();
+    if (time <= 0) {
+      state.updateQeustionTracker('answered');
       pubsub.transmit('outOfTime');
+      stop();
     } 
   };
 })();

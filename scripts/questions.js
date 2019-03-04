@@ -1,6 +1,6 @@
 //All the game's questions
 
-var Questions = {
+export var Questions = {
     //Besaid / very easy questions
         Besaid: [
             {

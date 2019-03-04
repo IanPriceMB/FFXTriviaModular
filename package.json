@@ -1,0 +1,27 @@
+{
+  "name": "FFXTriviaModular",
+  "version": "1.0.0",
+  "description": "I recently learned about pubsubs and modularizing code;",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack-dev-server --entry ./scripts/start.js --output-filename ./dist/bundle.js",
+    "build:prod": "webpack-dev-server scripts/start.js dist/bundle.js -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IanPriceMB/FFXTriviaModular.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IanPriceMB/FFXTriviaModular/issues"
+  },
+  "homepage": "https://github.com/IanPriceMB/FFXTriviaModular#readme",
+  "devDependencies": {
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1"
+  }
+}

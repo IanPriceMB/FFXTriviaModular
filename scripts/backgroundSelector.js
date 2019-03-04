@@ -1,28 +1,28 @@
 //This file dynamically changes the background
-
+import {pubsub} from'./pubsub';
+import {state} from './state';
 const backgroundSelector = (function() {
   
   //Event Listeners
   pubsub.subscribe('mainMenu', changeBackground);
-  pubsub.subscribe('levelStart', getState);
+  pubsub.subscribe('levelStart', changeBackground);
 
-  function getState() {
+  //Cache DOM
+  const $body = $('body');
+
+  function changeBackground(){
+
     const data = state.getState();
+    const src = data.levelTracker; 
 
-    changeBackground(data.levelTracker)
-  }
-
-  async function changeBackground(screen){
-    const a = await newSrc(screen);
-    if(a){
-      pubsub.transmit('imageLoaded', screen);
-    }
-  };
-
-  async function newSrc (src){
     const $img = $('#background');
-    $img.attr('src', `assets/backgrounds/${src}.png`);
-    return true
+    $img.remove();
+
+    if(src == 'mainMenu' || null){
+      $body.append(`<img #='background' src="assets/backgrounds/${src}.png" async defer onload="pubsub.transmit('imageLoaded', ${src})" />`);
+    } else {
+      $body.append(`<img #='background' src="assets/backgrounds/${src}.png" async defer onload="pubsub.transmit('levelImageLoaded', ${src})" />`);
+    }
   };
 
 })();

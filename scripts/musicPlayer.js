@@ -1,4 +1,5 @@
 //This file controls the music
+import {pubsub} from'./pubsub';
 
 const musicPlayer = (function() {
 
@@ -9,7 +10,8 @@ const musicPlayer = (function() {
   //Event Listeners
   pubsub.subscribe('imageLoaded', pauseMusic);
 
-  function pauseMusic(track) {
+  function pauseMusic(node) {
+    const track = node.getAttribute('id');
     $musicPlayers.map(index =>  {
       const playerID = $musicPlayers[index].getAttribute('id');
       const $currentPlayer = $("audio[id*='"+playerID+"']").get(0);
